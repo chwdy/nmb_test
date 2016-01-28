@@ -10,16 +10,40 @@ date_default_timezone_set('prc');
 echo "</br>";
 echo "</br>";
 echo "</br>";
-if (isset($_POST['newmsg'])) {
-    if(isset($_SESSION['msg'])) {
-$_SESSION['msg'] =  $_SESSION['msg']."<br/>"."时间".date("h:i:sa")."<br/>".$_POST['newmsg']."<br/>"."-------------------------------------------";
-}else{
-        $_SESSION['msg'] =  "-------------------------------------------"."<br/>"."时间".date("h:i:sa")."<br/>".$_POST['newmsg']."<br/>"."-------------------------------------------";
-}
-    
-    echo $_SESSION['msg'];
 
+
+$con = mysql_connect(SAE_MYSQL_HOST_M . ':' . SAE_MYSQL_PORT,SAE_MYSQL_USER,SAE_MYSQL_PASS);
+if (!$con)
+	{
+  die('Could not connect: ' . mysql_error());
+	}else{
+     	$sjk=mysql_select_db("app_chwdywp1",$con);
+  		if(!$sjk){
+   		echo "bu cun zai";
+  		}else{
+          mysql_select_db("app_chwdywp1", $con);
+      		mysql_query("CREATE TABLE IF NOT EXISTS nmb_save ( time varchar(30), text varchar(1000))");
+      		if (isset($_POST['newmsg'])) 
+            {
+                $date1 = date("h:i:sa");
+                mysql_select_db("app_chwdywp1", $con);
+				mysql_query("INSERT INTO nmb_save  VALUES('$date1',' $_POST[newmsg]')");
+			}
+  			$result1 = mysql_query("SELECT * FROM nmb_save");
+            if($result1){
+			while($row = mysql_fetch_array($result1))
+  			{
+  				echo "<br/>"."<br/>"."时间   ".$row['time'] ."<br/>". $row['text']."<br/>"."<br/>"."-------------------------------------------";
+  			}
+  		}
 }
+}
+
+
+
+
+echo "<br/>";
+echo "<br/>";
 echo "<br/>";
 $hour=date('G',time()); 
 if($hour>=5&&$hour<=12)

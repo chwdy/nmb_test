@@ -29,10 +29,10 @@ if (!$con)
                     $new_time = time();
                     $new_name = "user_$new_id";
                     
-                    $cookie_expire = $new_time + 100;
+                    $cookie_expire = $new_time + 36000;
                      mysql_query("INSERT INTO nmb_id  VALUES($new_id,'$new_name',1,$cookie_expire)");
-                    setcookie('id',$new_id,$new_time+ 100);
-                     setcookie('name',$new_name,$new_time+ 100)   ;
+                    setcookie('id',$new_id,$new_time+ 36000);
+                     setcookie('name',$new_name,$new_time+ 36000)   ;
                      br();br();br();
                     echo "已获得新身份  &nbsp;&nbsp;  ".$new_name;
                 }

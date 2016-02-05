@@ -30,7 +30,7 @@ if (!$con)
                 mysql_select_db("app_chwdywp1", $con);
                if(isset($_COOKIE['id']))
  			{
-                   $time_plus = time()+100;
+                   $time_plus = time()+36000;
                    $time_plus = (int)$time_plus;
                    setcookie('id',$_COOKIE['id'],$time_plus,'/../');
                    setcookie('name',$_COOKIE['name'],$time_plus,'/../')   ;

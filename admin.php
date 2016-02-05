@@ -3,7 +3,7 @@ header('Content-Type: text/html; charset=UTF-8');
 if ((!isset($_SESSION['admin_logged_in']))||(!$_SESSION['admin_logged_in'] == 1)) 
             {echo "<script>location.href='admin_login.php';</script>";
 }
-$time_plus = time()+100;
+$time_plus = time()+36000;
 $time_plus = (int)$time_plus;
 setcookie('id',$_COOKIE['id'],$time_plus);
 setcookie('name',$_COOKIE['name'],$time_plus)   ;
